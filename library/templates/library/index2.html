@@ -1,0 +1,33 @@
+{% extends 'library/base2.html' %}
+{% block index_active %}active{% endblock %}
+
+{% block body %}
+<div class="library-container container-fluid">
+
+    <!-- Plants -->
+    {% if plants %}
+        <div class="mainlastadded"> LAST ADDED PLANTS</div>
+        <table width="100%" align="justify" style="background: white;">
+            <tr class="lastaddedtablehead">
+                <th width="40%" height="30" scope="col">Botanical Name</th>
+                <th width="20%" height="30" scope="col">Common Name</th>
+                <th width="25%" height="30" scope="col">Image</th>
+                <th width="15%" height="30" scope="col">Date</th>
+            </tr>
+            <tbody>
+                {% for plant in plants %}
+                    <tr>
+                        <td height="30" class="lastaddedtable"><a href="{% url 'library:plant_detail' plant.id %}" class="link" role="button"><em>{{ plant.plant_botanical_name }}</em></a></td>
+                        <td height="30" class="lastaddedtable"><a href="{% url 'library:plant_detail' plant.id %}" class="link" role="button">{{ plant.plant_name }}</a></td>
+                        <td height="30" class="lastaddedtable" align="center"><img src="{{ plant.plant_picture.url }}" class="img-responsive" width="80%;"></td>
+                        <td height="30" align="center">{{ plant.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No plant has been uploaded.</p>
+    {% endif %}
+
+</div>
+{% endblock %}
